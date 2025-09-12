@@ -1,14 +1,22 @@
 package backend.bookstore.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
+    @Id
+
+    private String isbn;
 
     private String title;
     private String author;
     private int publicationYear;
-    private String isbn;
     private double price;
 
-    public Book(String title, String author, int publicationYear, String isbn, double price) {
+    public Book() { }
+
+    public Book(String isbn, String title, String author, int publicationYear, double price) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -19,6 +27,7 @@ public class Book {
     public String getTitle() { 
         return title; 
     }
+    
     public void setTitle(String title) { 
         this.title = title; 
     }
@@ -49,5 +58,10 @@ public class Book {
     }
     public void setPrice(double price) { 
         this.price = price; 
+    }
+
+    @Override
+    public String toString() {
+        return "Title= " + title + ", author=" + author + ", Publication year=" + publicationYear + ", isbn=" + isbn + ", price=" + price;
     }
 }
