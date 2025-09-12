@@ -18,6 +18,7 @@ public class BookstoreApplication {
 	public CommandLineRunner demo(BookRepository repository) {
 	return (args) -> {
 		repository.save(new Book("978-0261103344", "The Hobbit", "J.R.R. Tolkien", 1937, 15.99));
+		repository.findAll().forEach(System.out::println);
 	};
 }
 
