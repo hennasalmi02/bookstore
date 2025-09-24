@@ -10,5 +10,6 @@ public interface BookRepository extends CrudRepository<Book, String> {
 
 	List<Book> deleteByIsbn(String isbn);
 	
-	List<Book> findByIsbn(String isbn);
+	Book findByIsbn(String isbn);
+
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<table class="table table-striped">
+  <tr>
+   <th>Id</th>
+   <th>Name</th>
+  </tr>
+     <tr th:each = "category : ${categories}">
+       <td th:text="${category.categoryId}"></td>
+       <td th:text="${category.name}"></td>
+     </tr>
+     <a href="/addcategory" class="btn btn-primary">Add Category</a>
+</table>

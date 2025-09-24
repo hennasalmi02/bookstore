@@ -49,4 +49,11 @@ public class BookController {
         return "redirect:booklist";
     }
 
+    @RequestMapping(value = "/edit/{isbn}", method = RequestMethod.GET)
+    public String updateBook(@PathVariable("isbn") String isbn, Model model) {
+	    Book book = repository.findByIsbn(isbn);
+        model.addAttribute("book", book);
+	    return "editbook";
+    }
+
 }
