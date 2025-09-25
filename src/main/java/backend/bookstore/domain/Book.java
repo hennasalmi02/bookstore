@@ -67,6 +67,13 @@ public class Book {
         this.price = price; 
     }
 
+    public Category getCategory() {
+        return category;
+    }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Title= " + title + ", author=" + author + ", Publication year=" + publicationYear + ", isbn=" + isbn + ", price=" + price;

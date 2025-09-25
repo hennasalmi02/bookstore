@@ -1,6 +1,7 @@
 package backend.bookstore.web;
 
 import backend.bookstore.BookRepository;
+import backend.bookstore.CategoryRepository;
 import backend.bookstore.domain.Book;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BookController {
     @Autowired
     private BookRepository repository;
+    @Autowired
+    private CategoryRepository crepository;
 
     public BookController(BookRepository repository) {
         this.repository = repository;
@@ -28,6 +31,7 @@ public class BookController {
     @RequestMapping(value = "/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", crepository.findAll());
         return "addbook";
     }
 
@@ -53,6 +57,7 @@ public class BookController {
     public String updateBook(@PathVariable("isbn") String isbn, Model model) {
 	    Book book = repository.findByIsbn(isbn);
         model.addAttribute("book", book);
+        model.addAttribute("categories", crepository.findAll());
 	    return "editbook";
     }
 
