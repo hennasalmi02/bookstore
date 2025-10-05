@@ -5,6 +5,8 @@ import backend.bookstore.CategoryRepository;
 import backend.bookstore.domain.Book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +25,9 @@ public class BookController {
     }
 
     @RequestMapping(value = "/booklist")
-    public String showIndex(Model model) {
+    public String showIndex(Model model, Authentication authentication) {
         model.addAttribute("books", repository.findAll());
+        model.addAttribute("roles", authentication.getAuthorities());
         return "booklist";
     }
 
@@ -42,6 +45,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("isbn") String isbn, Model model) {
 	    repository.deleteByIsbn(isbn);
 	    return "redirect:../booklist";
